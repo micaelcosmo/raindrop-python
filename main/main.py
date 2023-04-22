@@ -56,12 +56,13 @@ def draw_objects(raindrops, umbrella, score):
     umbrella.draw(WIN)
     for raindrop in raindrops:
         raindrop.draw(WIN)
-    score_text = pygame.font.SysFont('comicsans', 30).render(f"Score: {score}", 1, (0, 0, 0))
+    score_text = pygame.font.SysFont('arial', 30).render(f"Score: {score}", 1, (0, 0, 0))
     WIN.blit(score_text, (WIDTH - score_text.get_width() - 10, 10))
     pygame.display.update()
 
 
 def main():
+    pygame.init()
     raindrops = []
     umbrella = Umbrella(WIDTH // 2, HEIGHT - 100)
     score = 0
@@ -105,3 +106,7 @@ def main():
         # Limpar a tela e desenhar os objetos
         clear()
         draw_objects(raindrops, umbrella, score)
+
+
+if __name__ == '__main__':
+    main()
