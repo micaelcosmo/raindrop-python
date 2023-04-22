@@ -9,7 +9,7 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Raindrop Catcher")
 
 # Carregar imagens
-UMBRELLA_IMAGE = pygame.image.load(os.path.join('../images', 'bucket.png'))
+BUCKET_IMAGE = pygame.image.load(os.path.join('../images', 'bucket.png'))
 RAIN_IMAGE = pygame.image.load(os.path.join('../images', 'droplet.png'))
 
 # Carregar sons
@@ -37,7 +37,7 @@ class Umbrella:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.image = UMBRELLA_IMAGE
+        self.image = BUCKET_IMAGE
 
     def move_left(self):
         if self.x > 0:
