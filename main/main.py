@@ -3,6 +3,7 @@ import os
 import random
 
 # Definir as dimensões da janela
+UMBRELA_SPEED = 5
 WIDTH, HEIGHT = 600, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Raindrop Catcher")
@@ -15,6 +16,8 @@ RAIN_IMAGE = pygame.image.load(os.path.join('../images', 'droplet.png'))
 pygame.mixer.init()
 RAIN_SOUND = pygame.mixer.Sound(os.path.join('../images', 'rain.mp3'))
 RAIN_SOUND.set_volume(0.1)
+
+UMBRELLA_SPEED = 20
 
 
 class Raindrop:
@@ -38,11 +41,11 @@ class Umbrella:
 
     def move_left(self):
         if self.x > 0:
-            self.x -= 5
+            self.x -= UMBRELA_SPEED
 
     def move_right(self):
         if self.x < WIDTH - self.image.get_width():
-            self.x += 5
+            self.x += UMBRELA_SPEED
 
     def draw(self, win):
         win.blit(self.image, (self.x, self.y))
@@ -56,7 +59,7 @@ def draw_objects(raindrops, umbrella, score):
     umbrella.draw(WIN)
     for raindrop in raindrops:
         raindrop.draw(WIN)
-    score_text = pygame.font.SysFont('arial', 30).render(f"Score: {score}", 1, (0, 0, 0))
+    score_text = pygame.font.SysFont('arial', 30).render(f"Score: {score}", True, (0, 0, 0))
     WIN.blit(score_text, (WIDTH - score_text.get_width() - 10, 10))
     pygame.display.update()
 
@@ -99,7 +102,7 @@ def main():
         # Verificar se o guarda-chuva pegou alguma gota de chuva e atualizar a pont
         for raindrop in raindrops:
             if raindrop.y + raindrop.image.get_height() > umbrella.y:
-                if raindrop.x > umbrella.x and raindrop.x < umbrella.x + umbrella.image.get_width():
+                if umbrella.x < raindrop.x < umbrella.x + umbrella.image.get_width():
                     score += 1
                     raindrops.remove(raindrop)
 
